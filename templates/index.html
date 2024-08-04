@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap and MVP CSS Example</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- MVP.css -->
+    <link href="https://unpkg.com/mvp.css" rel="stylesheet">
+    <style>
+        .custom-box {
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 50%;
+            background-color: #f9f9f9;
+        }
+        .custom-box .form-group {
+            display: flex;
+            justify-content: space-between;
+        }
+        .custom-box .form-group select,
+        .custom-box .form-group input {
+            flex: 1;
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="custom-box">
+        <form id="queryForm">
+            <div class="form-group">
+                <select id="typeSelect" class="form-control">
+                    <option value="userId">User ID</option>
+                    <option value="channelId">Channel ID</option>
+                </select>
+                <input id="textInput" type="text" class="form-control" placeholder="Enter text">
+                <button type="button" id="submitButton" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        // JavaScript for handling form submission
+        document.getElementById('submitButton').addEventListener('click', function() {
+            var type = document.getElementById('typeSelect').value;
+            var inputValue = encodeURIComponent(document.getElementById('textInput').value);
+
+            // Constructing the URL based on selection
+            var url = '/query';
+            if (type === 'userId') {
+                url += '?userid=' + inputValue;
+            } else if (type === 'channelId') {
+                url += '?chid=' + inputValue;
+            }
+
+            // Redirecting to the constructed URL
+            window.location.href = url;
+        });
+    </script>
+</body>
+</html>
